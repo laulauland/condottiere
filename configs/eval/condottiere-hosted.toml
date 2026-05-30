@@ -1,0 +1,36 @@
+# Hosted sweep: 50 seeded tasks x 4 opponent archetypes x 8 current models
+# (5 frontier closed-weight + 3 latest open-weight).
+model = "openai/gpt-5.5"
+num_examples = 50
+rollouts_per_example = 1
+# Keep this modest for hosted reliability; higher concurrency caused worker
+# heartbeat restarts on long reasoning trajectories, and reasoning models make
+# those trajectories longer.
+max_concurrent = 4
+
+[[ablation]]
+env_id = "laulauland/condottiere"
+state_columns = ["condottiere"]
+env_args = { num_examples = 50, max_turns = 32 }
+
+[ablation.sweep]
+model = [
+  # Frontier closed-weight
+  "openai/gpt-5.5",
+  "anthropic/claude-opus-4.7",
+  "google/gemini-3.1-pro-preview",
+  "deepseek/deepseek-v4-pro",
+  "moonshotai/kimi-k2.6",
+  # Latest open-weight (aligned with configs/rl + configs/gepa families)
+  "openai/gpt-oss-120b",
+  "qwen/qwen3.6-35b-a3b",
+  "prime-intellect/intellect-3",
+]
+
+[ablation.sweep.env_args]
+opponent = [
+  "Aggressive",
+  "Conservative",
+  "Hoarder",
+  "MatchFold",
+]

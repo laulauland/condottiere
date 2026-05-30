@@ -1,0 +1,13 @@
+# Cheap frontier smoke: is the eval interesting/working before a full sweep?
+# Kimi K2.6 is the cheapest frontier model on Prime Inference (0.95/4 per Mtok).
+# Aggressive opponent (harder than MatchFold) to surface non-zero regret/spread.
+# Concurrency >= num_examples so all games run at once: total wall ~= one game.
+model = "moonshotai/kimi-k2.6"
+num_examples = 8
+rollouts_per_example = 1
+max_concurrent = 8
+
+[[eval]]
+env_id = "condottiere"
+state_columns = ["condottiere"]
+env_args = { opponent = "Aggressive", num_examples = 8, max_turns = 32 }

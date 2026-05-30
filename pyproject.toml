@@ -1,0 +1,15 @@
+[project]
+name = "condottiere-lab"
+version = "0.0.1"
+description = "Workspace for the Condottiere Prime Intellect/verifiers environment"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "verifiers==0.1.14",
+]
+
+[tool.uv.workspace]
+members = [
+    "environments/condottiere",
+]
+
