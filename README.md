@@ -158,8 +158,7 @@ prime --plain eval run configs/eval/condottiere-hosted.toml --hosted
 - **Opponents:** `Aggressive`, `Conservative`, `Hoarder`, `MatchFold`
 
 These are **preliminary results** — the leaderboard discriminates broadly but is
-underpowered for fine ranking (see significance grouping below), and `kimi-k2.6` is still
-running.
+underpowered for fine ranking (see significance grouping below).
 
 Reward is mean negative regret per (model, opponent) cell, n=50; closer to 0 is better.
 Per-cell 95% CI is about ±0.08 (observed reward sd ≈ 0.29). Rows ordered best-to-worst by
@@ -170,13 +169,11 @@ mean reward.
 | `gemini-3.1-pro-preview` | -0.295 | -0.291 | -0.475 | -0.331 |
 | `gpt-5.5` | -0.413 | -0.356 | -0.505 | -0.306 |
 | `claude-opus-4.7` | -0.447 | -0.403 | -0.472 | -0.326 |
-| `kimi-k2.6` | — | — | — | — |
+| `kimi-k2.6` | -0.424 | -0.344 | -0.514 | -0.438 |
 | `deepseek-v4-pro` | -0.533 | -0.534 | -0.505 | -0.399 |
 | `intellect-3` | -0.508 | -0.574 | -0.390 | -0.351 |
 | `gpt-oss-120b` | -0.730 | -0.555 | -0.453 | -0.459 |
 | `qwen3.6-35b-a3b` | -0.867 | -0.697 | -0.475 | -0.745 |
-
-`kimi-k2.6` is still running; its row will be filled when the cells complete.
 
 Behavioral diagnostics pooled across all four opponents (n=200 per model), with the pooled
 mean-reward 95% CI from a paired bootstrap over shared seeds.
@@ -192,7 +189,7 @@ under either unit (52–72%), so the finding is not an artifact of the counting 
 | `gemini-3.1-pro-preview` | -0.348 | [-0.389, -0.306] | 5.8 | 0.66 | 0.42 | 0.38 | 68% | 61% |
 | `gpt-5.5` | -0.395 | [-0.436, -0.352] | 5.3 | 0.59 | 0.38 | 0.28 | 60% | 52% |
 | `claude-opus-4.7` | -0.412 | [-0.457, -0.368] | 5.2 | 0.62 | 0.42 | 0.39 | 63% | 61% |
-| `kimi-k2.6` | — | — | — | — | — | — | — | — |
+| `kimi-k2.6` | -0.430 | [-0.469, -0.391] | 5.3 | 0.60 | 0.47 | 0.32 | 61% | 59% |
 | `intellect-3` | -0.456 | [-0.493, -0.417] | 4.7 | 0.61 | 0.18 | 0.53 | 62% | 66% |
 | `deepseek-v4-pro` | -0.493 | [-0.534, -0.447] | 4.6 | 0.62 | 0.19 | 0.43 | 62% | 62% |
 | `gpt-oss-120b` | -0.549 | [-0.594, -0.505] | 4.0 | 0.63 | 0.19 | 0.52 | 65% | 64% |
@@ -204,6 +201,10 @@ broad tiers, not a clean total order:
 - **Top tier — `gemini-3.1-pro-preview`, `gpt-5.5`, `claude-opus-4.7`** are statistically
   tangled: gemini beats opus only marginally, and adjacent pairs (gemini vs gpt-5.5,
   gpt-5.5 vs opus) are **not** distinguishable. Do not read the within-tier order as real.
+- **Bridge — `kimi-k2.6`** sits between the tiers and is not cleanly separable from either:
+  its CI overlaps `gpt-5.5`/`opus` above and `intellect-3`/`deepseek-v4-pro` below. It has
+  the strongest spend-value correlation (0.47) of any model but middling overcommitment,
+  which is why it lands mid-board rather than top.
 - **Middle — `intellect-3`, `deepseek-v4-pro`** are not separable from each other, and the
   top/middle border is soft (opus vs intellect-3 overlaps).
 - **Bottom — `gpt-oss-120b`, then `qwen3.6-35b-a3b`** are clearly worse than the top tier;

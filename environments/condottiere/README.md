@@ -161,7 +161,7 @@ and behavioral diagnostics are in the [repository README](../../README.md).
 | `gemini-3.1-pro-preview` | -0.348 | [-0.389, -0.306] |
 | `gpt-5.5` | -0.395 | [-0.436, -0.352] |
 | `claude-opus-4.7` | -0.412 | [-0.457, -0.368] |
-| `kimi-k2.6` | — (still running) | — |
+| `kimi-k2.6` | -0.430 | [-0.469, -0.391] |
 | `intellect-3` | -0.456 | [-0.493, -0.417] |
 | `deepseek-v4-pro` | -0.493 | [-0.534, -0.447] |
 | `gpt-oss-120b` | -0.549 | [-0.594, -0.505] |
@@ -169,8 +169,9 @@ and behavioral diagnostics are in the [repository README](../../README.md).
 
 The board separates into broad tiers, not a clean total order: the top three
 (`gemini`, `gpt-5.5`, `opus`) are statistically tangled (adjacent pairs not distinguishable),
-`intellect-3`/`deepseek` are a middle pair, and `gpt-oss`/`qwen` are clearly worse. Treat
-the leaderboard as tiers until n grows. The hosted config pins `max_concurrent = 4`; higher
+`kimi-k2.6` bridges the top and middle (its CI overlaps both and it is not cleanly separable
+from either), `intellect-3`/`deepseek` are a middle pair, and `gpt-oss`/`qwen` are clearly
+worse. Treat the leaderboard as tiers until n grows. The hosted config pins `max_concurrent = 4`; higher
 concurrency caused worker heartbeat restarts on long reasoning trajectories.
 
 ## Paired budget-responsiveness
